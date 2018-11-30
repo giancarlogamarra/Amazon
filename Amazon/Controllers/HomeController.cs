@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Amazon.Models;
-
+using Amazon.Models.Extensions;
 namespace Amazon.Controllers
 {
     public class HomeController : Controller
@@ -14,6 +14,7 @@ namespace Amazon.Controllers
         {
             int hour = DateTime.Now.Hour;
             ViewBag.Greeting = hour < 12 ? "Goog Morning" : "Good Afternoon";
+            Repository.FillBooks();
             return View("Index");
         }
 
@@ -39,9 +40,11 @@ namespace Amazon.Controllers
         [HttpGet]
         public ViewResult ListResponses()
         {
-            //return View(Repository.Responses.Where(b => b.Price > 100)); Libros caros
-            //return View(Repository.Responses.Where(b => b.Price < 100)); Libros baratos
-            return View(Repository.Responses);
+           
+            IEnumerable<BookResponse> responses = Repository.FilterBookByPagesRatherThan(250);
+            decimal TotalPrice = responses.TotalPriceExtension();
+            ViewBag.TotalPrice = TotalPrice;
+            return View(responses);
         }
     }
 }
