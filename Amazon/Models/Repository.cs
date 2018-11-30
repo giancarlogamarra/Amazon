@@ -11,6 +11,8 @@ namespace Amazon.Models
                 return responses;
                 }
         }
+
+
         public static void AddResponse(BookResponse response) {
             responses.Add(response);
         }
