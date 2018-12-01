@@ -12,7 +12,6 @@ namespace Amazon.Controllers
     {
         public ViewResult Index()
         {
-            throw new Exception();
             int hour = DateTime.Now.Hour;
             ViewBag.Greeting = hour < 12 ? "Goog Morning" : "Good Afternoon";
             Repository.FillBooks();
