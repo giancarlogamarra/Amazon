@@ -1,39 +1,43 @@
 ﻿@model IEnumerable<Amazon.Models.BookResponse>
 @{
-    Layout = null;
+    Layout = "_Layout";
 }
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Responses</title>
-    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
-</head>
-<body class="panel-body">
-    <h2>Lista de Libros en Amazon</h2>
-    <table class="table table-sm table-striped table-bordered">
-        <thead>
-            <tr>
-                <th>ISBN</th>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Price</th>
-                <th>NroPages</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (Amazon.Models.BookResponse book in Model)
-            {
+
+<h2>Lista de Libros en Amazon</h2>
+<table class="table table-sm table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>ISBN</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Price</th>
+            <th>NroPages</th>
+            <th>¿En Estock?</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Amazon.Models.BookResponse book in Model)
+        {
             <tr>
                 <td>@(book?.ISBN ?? "<ISB no establecido>") </td>
                 <td>@(book?.Title ?? "<Titulo no establecido>")</td>
                 <td>@(book?.Author ?? "<Autor no establecido>")</td>
                 <td>@(book?.Price ?? 0)</td>
                 <td>@(book?.NroPages ?? 0)</td>
+                <td>
+                    @switch (book?.LevelStock)
+                    {
+                        case LevelStock.InStock:
+                            <span class="badge badge-success">En Stock</span>
+                            break;
+                        case LevelStock.SoldOut:
+                            <span class="badge badge-danger">Agotado</span>
+                            break;
+                    }
+                </td>
             </tr>
-            }
-        </tbody>
-    </table>
-    <h1>@($"Precio Total de los Libros es de {ViewBag.TotalPrice:c2}")</h1>
-</body>
-</html>
+        }
+    </tbody>
+</table>
+
+<h1>@($"Precio Total de los Libros es de {ViewBag.TotalPrice:c2}")</h1>

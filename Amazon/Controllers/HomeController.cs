@@ -12,6 +12,7 @@ namespace Amazon.Controllers
     {
         public ViewResult Index()
         {
+            throw new Exception();
             int hour = DateTime.Now.Hour;
             ViewBag.Greeting = hour < 12 ? "Goog Morning" : "Good Afternoon";
             Repository.FillBooks();
@@ -40,8 +41,7 @@ namespace Amazon.Controllers
         [HttpGet]
         public ViewResult ListResponses()
         {
-           
-            IEnumerable<BookResponse> responses = Repository.FilterBookByPagesRatherThan(250);
+            IEnumerable<BookResponse> responses = Repository.FilterBookByPagesRatherThan(0);
             decimal TotalPrice = responses.TotalPriceExtension();
             ViewBag.TotalPrice = TotalPrice;
             return View(responses);

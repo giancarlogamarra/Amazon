@@ -40,8 +40,10 @@ namespace Amazon.Models
                 Author = "Giancarlo G",
                 NroPages = 500,
                 Price = 200,
-                Title = "How to Program Java"
+                Title = "How to Program Java",
+                LevelStock =LevelStock.SoldOut
             };
+
             responses.Add(book1);
             responses.Add(book2);
             responses.Add(book3);
