@@ -29,8 +29,8 @@ namespace Amazon
         {
             if (env.IsDevelopment())
             {
-                app.UseBrowserLink();
-                app.UseDeveloperExceptionPage();
+               app.UseBrowserLink();
+               app.UseDeveloperExceptionPage();
             }
             else
             {
