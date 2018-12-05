@@ -1,55 +1,46 @@
-﻿@model Amazon.Models.BookResponse
+﻿
+@model Amazon.Models.BookResponse
 
 @{
     Layout = "_Layout";
     ViewData["Title"] = "RegBookForm";
 }
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>RegBookForm</title>
-    <link rel="stylesheet" href="~/css/style.css" />
-
-</head>
-<body>
-
-    <div class="card">
-        <div class="card-header">
-            <h4>REGISTRAR UN LIBRO</h4>
-        </div>
-
-        <div class="card-body">
-             
-            <form asp-action="RegBookForm" method="post">
-                <div asp-validation-summary="All"></div>
-                <div class="form-group">
-                    <label asp-for="ISBN">ISBN:</label>
-                    <input class="form-control" asp-for="ISBN" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="Title">Title:</label>
-                    <input class="form-control" asp-for="Title" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="Author">Author:</label>
-                    <input class="form-control" asp-for="Author" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="Price">Price:</label>
-                    <input class="form-control" asp-for="Price" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="NroPages">NroPages:</label>
-                    <input class="form-control" asp-for="NroPages" />
-                </div>
-                <div class="text-center">
-                    <button class="btn btn-primary" type="submit">Submit RegBook</button>
-
-                </div>
-            </form>
-        </div>
+<link rel="stylesheet" href="~/css/style.css" />
+<div class="card">
+    <div class="card-header">
+        <h4>REGISTRAR UN LIBRO</h4>
     </div>
-</body>
-</html>
+
+    <div class="card-body">
+
+        <form asp-action="RegBookForm" method="post">
+            <div asp-validation-summary="All"></div>
+            <div class="form-group">
+                <label asp-for="ISBN">ISBN:</label>
+                <input class="form-control" asp-for="ISBN" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Title">Title:</label>
+                <input class="form-control" asp-for="Title" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Author">Author:</label>
+                <input class="form-control" asp-for="Author" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Price">Price:</label>
+                <input class="form-control" asp-for="Price" />
+            </div>
+            <div class="form-group">
+                <label asp-for="NroPages">NroPages:</label>
+                <input class="form-control" asp-for="NroPages" />
+            </div>
+            <div class="text-center">
+                <button class="btn btn-primary" type="submit">Submit RegBook</button>
+
+            </div>
+        </form>
+    </div>
+</div>
+
 
