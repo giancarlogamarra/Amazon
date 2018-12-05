@@ -1,7 +1,7 @@
 ﻿@model Amazon.Models.BookResponse
 
 @{
-    Layout = null;
+    Layout = "_Layout";
     ViewData["Title"] = "RegBookForm";
 }
 
@@ -10,14 +10,18 @@
     <meta name="viewport" content="width=device-width" />
     <title>RegBookForm</title>
     <link rel="stylesheet" href="~/css/style.css" />
-    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+
 </head>
 <body>
 
-    <div class="panel panel-success">
-        <div class="panel-heading text-center"><h4>REGISTRAR UN LIBRO</h4></div>
-        <div class="panel-body">
-            <form class="p-a-1" asp-action="RegBookForm" method="post">
+    <div class="card">
+        <div class="card-header">
+            <h4>REGISTRAR UN LIBRO</h4>
+        </div>
+
+        <div class="card-body">
+             
+            <form asp-action="RegBookForm" method="post">
                 <div asp-validation-summary="All"></div>
                 <div class="form-group">
                     <label asp-for="ISBN">ISBN:</label>
@@ -40,8 +44,8 @@
                     <input class="form-control" asp-for="NroPages" />
                 </div>
                 <div class="text-center">
-                    <button class="btn btn-primary"  type="submit">Submit RegBook</button>
-                    
+                    <button class="btn btn-primary" type="submit">Submit RegBook</button>
+
                 </div>
             </form>
         </div>

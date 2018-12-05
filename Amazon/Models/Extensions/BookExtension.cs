@@ -12,7 +12,7 @@ namespace Amazon.Models.Extensions
             return books.Sum(b => b?.Price ?? 0);
         }
 
-        public static IEnumerable<BookResponse> FilterByNroPagesGreaterThan(this List<BookResponse> books, int nroPages)
+        public static IEnumerable<BookResponse> FilterByNroPagesGreaterThan(this IEnumerable<BookResponse> books, int nroPages)
         {
             return books.Where(b => b != null && b.NroPages > nroPages);
         }

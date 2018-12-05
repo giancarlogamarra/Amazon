@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Amazon.Models;
+﻿using Amazon.Models;
 using Amazon.Models.Extensions;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace Amazon.Controllers
 {
     public class HomeController : Controller
     {
+        public IRepository repository = Repository.SharedRepository;
         public ViewResult Index()
         {
-            int hour = DateTime.Now.Hour;
-            ViewBag.Greeting = hour < 12 ? "Goog Morning" : "Good Afternoon";
-            Repository.FillBooks();
-            return View("Index");
+            return View("Index", repository.Books.FilterByNroPagesGreaterThan(300).ToList());
         }
 
         [HttpGet]
@@ -28,7 +24,7 @@ namespace Amazon.Controllers
         {
             if (ModelState.IsValid)
             {
-                Repository.AddResponse(bookResponse);
+                repository.AddBook(bookResponse);
                 return View("Thanks", bookResponse);
             }
             else {
@@ -40,7 +36,7 @@ namespace Amazon.Controllers
         [HttpGet]
         public ViewResult ListResponses()
         {
-            IEnumerable<BookResponse> responses = Repository.FilterBookByPagesRatherThan(0);
+            IEnumerable<BookResponse> responses = repository.Books.FilterByNroPagesGreaterThan(0);
             decimal TotalPrice = responses.TotalPriceExtension();
             ViewBag.TotalPrice = TotalPrice;
             return View(responses);

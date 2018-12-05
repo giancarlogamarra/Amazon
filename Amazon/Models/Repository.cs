@@ -3,20 +3,13 @@ using System.Collections.Generic;
 using Amazon.Models.Extensions;
 namespace Amazon.Models
 {
-    public class Repository
+    public class Repository : IRepository
     {
-        public static List<BookResponse> responses = new List<BookResponse>();
-        public static IEnumerable<BookResponse> Responses {
-            get {
-                return responses;
-                }
-        }
+        private static Repository sharedRepository = new Repository();
+        public static Repository SharedRepository => sharedRepository;
+        public List<BookResponse> books = new List<BookResponse>();
 
-        public static void AddResponse(BookResponse response) {
-            responses.Add(response);
-        }
-
-        public static List<BookResponse> FillBooks()
+        public Repository()
         {
             BookResponse book1 = new BookResponse()
             {
@@ -41,23 +34,20 @@ namespace Amazon.Models
                 NroPages = 500,
                 Price = 200,
                 Title = "How to Program Java",
-                LevelStock =LevelStock.SoldOut
+                LevelStock = LevelStock.SoldOut
             };
 
-            responses.Add(book1);
-            responses.Add(book2);
-            responses.Add(book3);
-            responses.Add(null);
-            return responses;
+            books.Add(book1);
+            books.Add(book2);
+            books.Add(book3);
+            books.Add(null);
         }
 
-        public static decimal TotalPrice() {
-            return responses.TotalPriceExtension();
-        }
-
-        public static IEnumerable<BookResponse> FilterBookByPagesRatherThan(int nroPages)
+        public IEnumerable<BookResponse> Books => books;
+        public void AddBook(BookResponse b)
         {
-            return responses.FilterByNroPagesGreaterThan(nroPages);
+            books.Add(b);
         }
     }
+
 }
