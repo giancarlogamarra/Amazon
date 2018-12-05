@@ -11,7 +11,7 @@ namespace Amazon.Controllers
         public IRepository repository = Repository.SharedRepository;
         public ViewResult Index()
         {
-            return View("Index", repository.Books.FilterByNroPagesGreaterThan(300).ToList());
+            return View("Index", repository.Books);
         }
 
         [HttpGet]
