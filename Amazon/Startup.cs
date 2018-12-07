@@ -34,6 +34,10 @@ namespace Amazon
             app.UseStaticFiles();
             app.UseMvc(routes => {
                 routes.MapRoute(
+                    name: "pagination",
+                        template: "Books/Page{bookPage}",
+                        defaults: new { Controller = "Home", action = "Index" });
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });

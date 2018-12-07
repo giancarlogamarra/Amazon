@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Amazon.Models.Book>
+﻿@model BooksListViewModel
 @{
 
     ViewData["Title"] = ".:: Amazon ::.";
@@ -13,7 +13,7 @@
 <div class="container-fluid">
 
     <div class="row">
-        @foreach (Amazon.Models.Book book in Model)
+        @foreach (Amazon.Models.Book book in Model.Books)
         {
             <div class="col-sm-3">
                 <div class="card" style="width: 18rem;">
@@ -48,5 +48,6 @@
             </div>
         }
     </div>
+    <div page-model="@Model.PagingInfo" page-action="Index"></div>
 </div>
 
