@@ -3,15 +3,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Amazon.Controllers
 {
-    public class HomeController : Controller
+    public class BookController : Controller
     {
         private IBookRepository repository;
-        public HomeController(IBookRepository repo)
+        public BookController(IBookRepository repo)
         {
             repository = repo;
         }
 
-        public ViewResult Index() => View(repository.Books);
+        public ViewResult List() => View(repository.Books);
        
     }
 }

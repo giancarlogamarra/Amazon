@@ -35,7 +35,7 @@ namespace Amazon
             app.UseMvc(routes => {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Book}/{action=List}/{id?}");
             });
             SeedData.EnsurePopulated(app);
         }
