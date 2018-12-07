@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Amazon.Test
 {
-    public class IndexControllerTests
+    public class BookControllerTests
     {
         [Fact]
         public void Can_Send_Pagination_View_Model()
@@ -24,10 +24,10 @@ namespace Amazon.Test
             new Book {BookId = Guid.NewGuid(), Title = "B5", Author="GG",ISBN="76533", Price = 500},
             }).AsQueryable<Book>());
             // Arrange
-            HomeController controller =
-            new HomeController(mock.Object) { PageSize = 3 };
+            BookController controller =
+            new BookController(mock.Object) { PageSize = 3 };
             // Act
-            BooksListViewModel result = controller.Index(2).ViewData.Model as BooksListViewModel;
+            BooksListViewModel result = controller.List(2).ViewData.Model as BooksListViewModel;
             // Assert
             PagingInfo pageInfo = result.PagingInfo;
             Assert.Equal(2, pageInfo.CurrentPage);
@@ -48,10 +48,10 @@ namespace Amazon.Test
             new Book {BookId = Guid.NewGuid(), Title = "B4", Author="GG",ISBN="76532", Price = 400},
             new Book {BookId = Guid.NewGuid(), Title = "B5", Author="GG",ISBN="76533", Price = 500},
             }).AsQueryable<Book>());
-            HomeController controller = new HomeController(mock.Object);
+            BookController controller = new BookController(mock.Object);
             controller.PageSize = 3;
             // Act
-            BooksListViewModel result = controller.Index(2).ViewData.Model as BooksListViewModel; 
+            BooksListViewModel result = controller.List(2).ViewData.Model as BooksListViewModel; 
             // Assert
             Book[] bookArray = result.Books.ToArray();
             Assert.True(bookArray.Length == 2);

@@ -36,10 +36,10 @@ namespace Amazon
                 routes.MapRoute(
                     name: "pagination",
                         template: "Books/Page{bookPage}",
-                        defaults: new { Controller = "Home", action = "Index" });
+                        defaults: new { Controller = "Book", action = "List" });
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Book}/{action=List}/{id?}");
             });
             SeedData.EnsurePopulated(app);
         }

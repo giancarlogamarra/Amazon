@@ -4,16 +4,16 @@ using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 namespace Amazon.Controllers
 {
-    public class HomeController : Controller
+    public class BookController : Controller
     {
         private IBookRepository repository;
         public int PageSize = 4;
-        public HomeController(IBookRepository repo)
+        public BookController(IBookRepository repo)
         {
             repository = repo;
         }
 
-        public ViewResult Index(int bookPage = 1)
+        public ViewResult List(int bookPage = 1)
         {
            var bookListViewModel = new BooksListViewModel
             {
