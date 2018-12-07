@@ -7,12 +7,12 @@ namespace Amazon.Models.Extensions
 {
     public static class BookExtension
     {
-        public static decimal TotalPriceExtension(this IEnumerable<BookResponse> books)
+        public static decimal TotalPriceExtension(this IEnumerable<Book> books)
         {
             return books.Sum(b => b?.Price ?? 0);
         }
 
-        public static IEnumerable<BookResponse> FilterByNroPagesGreaterThan(this IEnumerable<BookResponse> books, int nroPages)
+        public static IEnumerable<Book> FilterByNroPagesGreaterThan(this IEnumerable<Book> books, int nroPages)
         {
             return books.Where(b => b != null && b.NroPages > nroPages);
         }

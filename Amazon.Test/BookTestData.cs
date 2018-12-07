@@ -16,13 +16,13 @@ namespace Amazon.Test
             return this.GetEnumerator();
         }
         //METODO
-        private IEnumerable<BookResponse> GetNroPagesUnder300()
+        private IEnumerable<Book> GetNroPagesUnder300()
         {
 
             int[] nroPages = new int[] { 250, 180, 250, 290 };
             for (int i = 0; i < nroPages.Length; i++)
             {
-                yield return new BookResponse
+                yield return new Book
                 {
                     Title = $"P{i + 1}",
                     NroPages = nroPages[i]
@@ -30,11 +30,11 @@ namespace Amazon.Test
             }
         }
         //PROPIEDAD
-        private IEnumerable<BookResponse> GetNroPagesOver300 => new List<BookResponse> {
-        new BookResponse { Title = "P1", NroPages = 320 },
-        new BookResponse { Title = "P2", NroPages = 310},
-        new BookResponse { Title = "P3", NroPages = 400},
-        new BookResponse { Title = "P4", NroPages = 500}};
+        private IEnumerable<Book> GetNroPagesOver300 => new List<Book> {
+        new Book { Title = "P1", NroPages = 320 },
+        new Book { Title = "P2", NroPages = 310},
+        new Book { Title = "P3", NroPages = 400},
+        new Book { Title = "P4", NroPages = 500}};
     }
 }
 
