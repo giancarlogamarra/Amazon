@@ -4,30 +4,32 @@ using System.Collections.Generic;
 
 namespace Amazon.Test
 {
-    public class BookTestData : IEnumerable<object[]>
+    public class BookTestData : IEnumerable<BookResponse[]>
     {
-        public IEnumerator<object[]> GetEnumerator()
-        {
-            yield return new object[] { GetNroPagesUnder300() };
-            yield return new object[] { GetNroPagesOver300 };
-        }
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }
+        public IEnumerator<object[]> GetEnumerator()
+        {
+            yield return new BookResponse[] { GetNroPagesUnder300() };
+            yield return new BookResponse[] { GetNroPagesOver300 };
+        }
+        
         //METODO
         private IEnumerable<BookResponse> GetNroPagesUnder300()
         {
-
+            List<BookResponse> ListBooks = new List<BookResponse>();
             int[] nroPages = new int[] { 250, 180, 250, 290 };
             for (int i = 0; i < nroPages.Length; i++)
             {
-                yield return new BookResponse
+                ListBooks.Add(new BookResponse
                 {
                     Title = $"P{i + 1}",
                     NroPages = nroPages[i]
-                };
+                });
             }
+            return ListBooks.ToArray();
         }
         //PROPIEDAD
         private IEnumerable<BookResponse> GetNroPagesOver300 => new List<BookResponse> {
