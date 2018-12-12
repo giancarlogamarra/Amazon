@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace Amazon.Models
 {
@@ -20,6 +18,7 @@ namespace Amazon.Models
         [Required(ErrorMessage = "Porfavor ingresa un Nro de Paginas")]
         public int? NroPages { get; set; }
         public LevelStock LevelStock { get; set; } = LevelStock.InStock;
+        public string Category { get; set; }
     }
 }
 
