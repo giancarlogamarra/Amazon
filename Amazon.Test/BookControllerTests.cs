@@ -27,7 +27,7 @@ namespace Amazon.Test
             BookController controller =
             new BookController(mock.Object) { PageSize = 3 };
             // Act
-            BooksListViewModel result = controller.List(2).ViewData.Model as BooksListViewModel;
+            BooksListViewModel result = controller.List(null,2).ViewData.Model as BooksListViewModel;
             // Assert
             PagingInfo pageInfo = result.PagingInfo;
             Assert.Equal(2, pageInfo.CurrentPage);
@@ -51,12 +51,38 @@ namespace Amazon.Test
             BookController controller = new BookController(mock.Object);
             controller.PageSize = 3;
             // Act
-            BooksListViewModel result = controller.List(2).ViewData.Model as BooksListViewModel; 
+            BooksListViewModel result = controller.List(null, 2).ViewData.Model as BooksListViewModel; 
             // Assert
             Book[] bookArray = result.Books.ToArray();
             Assert.True(bookArray.Length == 2);
             Assert.Equal("B4", bookArray[0].Title);
             Assert.Equal("B5", bookArray[1].Title);
+        }
+
+        [Fact]
+        public void Can_Filter_Products()
+        {
+            // Arrange
+            // - create the mock repository
+            Mock<IBookRepository> mock = new Mock<IBookRepository>();
+            mock.Setup(m => m.Books).Returns((new Book[] {
+            new Book {Title = "B1", Category = "Cat1"},
+            new Book {Title = "B2", Category = "Cat2"},
+            new Book {Title = "B3", Category = "Cat1"},
+            new Book {Title = "B4", Category = "Cat2"},
+            new Book {Title = "B5", Category = "Cat3"}
+            }).AsQueryable<Book>());
+            // Arrange - create a controller and make the page size 3 items
+            BookController controller = new BookController(mock.Object);
+            controller.PageSize = 3;
+            // Action
+            Book[] result =
+            (controller.List("Cat2", 1).ViewData.Model as BooksListViewModel)
+            .Books.ToArray();
+            // Assert
+            Assert.Equal(2, result.Length);
+            Assert.True(result[0].Title == "B2" && result[0].Category == "Cat2");
+            Assert.True(result[1].Title == "B4" && result[1].Category == "Cat2");
         }
     }
 }
