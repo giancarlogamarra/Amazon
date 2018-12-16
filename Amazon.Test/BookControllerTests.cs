@@ -1,6 +1,7 @@
 ﻿using Amazon.Controllers;
 using Amazon.Models;
 using Amazon.Models.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -83,6 +84,34 @@ namespace Amazon.Test
             Assert.Equal(2, result.Length);
             Assert.True(result[0].Title == "B2" && result[0].Category == "Cat2");
             Assert.True(result[1].Title == "B4" && result[1].Category == "Cat2");
+        }
+
+        [Fact]
+        public void Generate_Category_Specific_Product_Count()
+        {
+            // Arrange
+            Mock<IBookRepository> mock = new Mock<IBookRepository>();
+            mock.Setup(m => m.Books).Returns((new Book[] {
+            new Book {Title = "B1", Category = "Cat1"},
+            new Book {Title = "B2", Category = "Cat2"},
+            new Book {Title = "B3", Category = "Cat1"},
+            new Book {Title = "B4", Category = "Cat2"},
+            new Book {Title = "B5", Category = "Cat3"}
+            }).AsQueryable<Book>());
+            BookController target = new BookController(mock.Object);
+            target.PageSize = 3;
+            
+            // Action
+            int? res1 = ((target.List("Cat1") as ViewResult).Model as BooksListViewModel).PagingInfo.TotalItems;
+            int? res2 = ((target.List("Cat1") as ViewResult).Model as BooksListViewModel).PagingInfo.TotalItems;
+            int? res3 = ((target.List("Cat1") as ViewResult).Model as BooksListViewModel).PagingInfo.TotalItems;
+            int? resAll = ((target.List("Cat1") as ViewResult).Model as BooksListViewModel).PagingInfo.TotalItems;
+
+            // Assert
+            Assert.Equal(2, res1);
+            Assert.Equal(2, res2);
+            Assert.Equal(1, res3);
+            Assert.Equal(5, resAll);
         }
     }
 }

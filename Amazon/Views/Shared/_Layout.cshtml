@@ -35,7 +35,7 @@
             </form>
         </div>
     </nav>
-
+    @await Component.InvokeAsync("NavigationMenu")
     <div class="body-content">
         @RenderBody()
     </div>

@@ -26,7 +26,11 @@ namespace Amazon.Controllers
                 {
                     CurrentPage = bookPage,
                     ItemsPerPage = PageSize,
-                    TotalItems = repository.Books.Count()
+                    // TotalItems = repository.Books.Count(),
+                    TotalItems = category == null ?
+                                repository.Books.Count() :
+                                repository.Books.Where(e =>
+                                e.Category == category).Count()
                 },
                 CurrentCategory = category
             };

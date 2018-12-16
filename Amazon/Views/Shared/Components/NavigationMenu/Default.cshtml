@@ -1,0 +1,23 @@
+﻿@model IEnumerable<string>
+<ul class="nav  nav-pills">
+    <li class="nav-item">
+        <a class="nav-link"
+           asp-action="List"
+           asp-controller="Book"
+           asp-route-category="">
+            Home
+        </a>
+    </li>
+    @foreach (string category in Model)
+    {
+    <li class="nav-item">
+            <a class="nav-link @(category == ViewBag.SelectedCategory ? "active": "")"
+               asp-action="List"
+               asp-controller="Book"
+               asp-route-category="@category"
+               asp-route-bookPage="1">
+                @category
+            </a>
+    </li>
+    }
+</ul>
