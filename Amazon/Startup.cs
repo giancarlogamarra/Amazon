@@ -24,6 +24,7 @@ namespace Amazon
                  Configuration["Data:AmazonStoreDB:ConnectionString"]));
 
             services.AddTransient<IBookRepository, EFBookRepository>();
+            services.AddTransient<IOrderRepository, EFOrderRepository>();
             services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddMvc();
