@@ -11,8 +11,8 @@ using System;
 namespace Amazon.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190117162158_Orders")]
-    partial class Orders
+    [Migration("20190121211125_ShippedOrders")]
+    partial class ShippedOrders
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -92,6 +92,8 @@ namespace Amazon.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired();
+
+                    b.Property<bool>("Shipped");
 
                     b.Property<string>("State")
                         .IsRequired();

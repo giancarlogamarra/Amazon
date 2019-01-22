@@ -11,9 +11,10 @@ using System;
 namespace Amazon.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190117202513_Orders")]
+    partial class Orders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,8 +92,6 @@ namespace Amazon.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired();
-
-                    b.Property<bool>("Shipped");
 
                     b.Property<string>("State")
                         .IsRequired();
