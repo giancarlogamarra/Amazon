@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace Amazon.Models
 {
@@ -10,5 +11,28 @@ namespace Amazon.Models
             context = ctx;
         }
         public IQueryable<Book> Books => context.Books;
+
+        public void SaveBook(Book book)
+        {
+            if (book.BookId == Guid.Empty)
+            {
+                context.Books.Add(book);
+            }
+            else
+            {
+                Book dbEntry = context.Books
+                .FirstOrDefault(p => p.BookId == book.BookId);
+                if (dbEntry != null)
+                {
+                    dbEntry.Title = book.Title;
+                    dbEntry.ISBN = book.ISBN;
+                    dbEntry.Author = book.Author;
+                    dbEntry.Price = book.Price;
+                    dbEntry.Category = book.Category;
+                    dbEntry.NroPages = book.NroPages;
+                }
+            }
+            context.SaveChanges();
+        }
     }
 }

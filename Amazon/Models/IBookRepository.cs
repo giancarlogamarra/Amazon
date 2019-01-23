@@ -6,5 +6,6 @@ namespace Amazon.Models
     public interface IBookRepository
     {
         IQueryable<Book> Books { get; }
+        void SaveBook(Book book);
     }
 }

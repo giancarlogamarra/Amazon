@@ -4,7 +4,7 @@ using System.Linq;
 using Amazon.Models.Extensions;
 namespace Amazon.Models
 {
-    public class FakeBookRepository : IBookRepository
+    public class FakeBookRepository /*: IBookRepository*/
     {
 
         public IQueryable<Book> Books => new List<Book> {
