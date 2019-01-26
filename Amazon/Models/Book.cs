@@ -14,6 +14,7 @@ namespace Amazon.Models
         [Required(ErrorMessage = "Porfavor ingresa un Author")]
         public string Author { get; set; }
         [Required(ErrorMessage = "Porfavor ingresa un Precio")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "Porfavor ingresar un precio positivo")]
         public decimal? Price { get; set; }
         [Required(ErrorMessage = "Porfavor ingresa un Nro de Paginas")]
         public int? NroPages { get; set; }

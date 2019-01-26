@@ -34,5 +34,16 @@ namespace Amazon.Models
             }
             context.SaveChanges();
         }
+        public Book DeleteBook(Guid bookID)
+        {
+            Book dbEntry = context.Books
+            .FirstOrDefault(p => p.BookId == bookID);
+            if (dbEntry != null )
+            {
+                context.Books.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
     }
 }

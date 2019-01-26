@@ -34,5 +34,19 @@ namespace Amazon.Controllers
             }
         }
 
+        [HttpPost]
+        public IActionResult Delete(Guid bookId)
+        {
+            Book deletedBook = repository.DeleteBook(bookId);
+            if (deletedBook != null)
+            {
+                TempData["message"] = $"{deletedBook.Title} was deleted";
+            }
+            return RedirectToAction("Index");
+        }
+        public ViewResult Create() {
+            return View("Edit", new Book());
+        }
+
     }
 }

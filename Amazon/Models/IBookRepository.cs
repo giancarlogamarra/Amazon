@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Amazon.Models
@@ -7,5 +8,6 @@ namespace Amazon.Models
     {
         IQueryable<Book> Books { get; }
         void SaveBook(Book book);
+        Book DeleteBook(Guid bookID);
     }
 }

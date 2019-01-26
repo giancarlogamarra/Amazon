@@ -73,6 +73,28 @@ namespace Amazon.Test
             // Assert
             Assert.Null(result);
         }
+
+        [Fact]
+        public void Can_Delete_Valid_Products()
+        {
+            // Arrange - create a Book
+            Guid bookID = Guid.NewGuid();
+            Book book = new Book { BookId = bookID, Title = "Book Test" };
+            // Arrange - create the mock repository
+            Mock<IBookRepository> mock = new Mock<IBookRepository>();
+            mock.Setup(m => m.Books).Returns(new Book[] {
+                new Book {BookId = Guid.NewGuid(), Title = "B1"},  book,
+                new Book {BookId = Guid.NewGuid(), Title = "B3"},
+                }.AsQueryable<Book>());
+            // Arrange - create the controller
+            AdminController target = new AdminController(mock.Object);
+            // Act - delete the book
+            target.Delete(book.BookId);
+            // Assert - ensure that the repository delete method was
+            // called with the correct Book
+            mock.Verify(m => m.DeleteBook(book.BookId));
+        }
+
         private T GetViewModel<T>(IActionResult result) where T : class
         {
             return (result as ViewResult)?.ViewData.Model as T;
