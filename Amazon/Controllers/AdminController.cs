@@ -1,10 +1,12 @@
 ﻿using Amazon.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 
 namespace Amazon.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         private IBookRepository repository;
