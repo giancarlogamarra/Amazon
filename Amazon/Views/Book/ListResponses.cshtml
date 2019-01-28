@@ -1,5 +1,5 @@
 ﻿
-@model IEnumerable<Amazon.Models.BookResponse>
+@model IEnumerable<Amazon.Models.Book>
 @{
     Layout = "_Layout";
 }
@@ -17,7 +17,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (Amazon.Models.BookResponse book in Model)
+        @foreach (Amazon.Models.Book book in Model)
         {
             <tr>
                 <td>@(book?.ISBN ?? "<ISB no establecido>") </td>

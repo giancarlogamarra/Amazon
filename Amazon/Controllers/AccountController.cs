@@ -1,4 +1,5 @@
-﻿using Amazon.Models.ViewModels;
+﻿using Amazon.Models;
+using Amazon.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +17,7 @@ namespace Amazon.Controllers
         {
             userManager = userMgr;
             signInManager = signInMgr;
+            IdentitySeedData.EnsurePopulated(userMgr).Wait();
         }
         [AllowAnonymous]
         public ViewResult Login(string returnUrl)

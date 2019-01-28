@@ -14,10 +14,11 @@ namespace Amazon.Components
         public IViewComponentResult Invoke()
         {
             ViewBag.SelectedCategory = RouteData?.Values["category"];
-            return View(repository.Books
+            var result = repository.Books
             .Select(x => x.Category)
             .Distinct()
-            .OrderBy(x => x));
+            .OrderBy(x => x);
+            return View(result);
         }
     }
 }
