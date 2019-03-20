@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,6 +24,15 @@ namespace Amazon
              options.UseSqlServer(
                  Configuration["Data:AmazonStoreDB:ConnectionString"]));
 
+            services.AddDbContext<AppIdentityDbContext>(options => 
+            options.UseSqlServer(
+                Configuration["Data:AmazonStoreIdentity:ConnectionString"]));
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppIdentityDbContext>()
+                .AddDefaultTokenProviders();
+
+
             services.AddTransient<IBookRepository, EFBookRepository>();
             services.AddTransient<IOrderRepository, EFOrderRepository>();
             services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
@@ -39,6 +49,7 @@ namespace Amazon
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseSession();
+            app.UseAuthentication();
             app.UseMvc(routes => {
 
                 routes.MapRoute(
@@ -68,6 +79,7 @@ namespace Amazon
 
             });
             SeedData.EnsurePopulated(app);
+            IdentitySeedData.EnsurePopulated(app);
         }
     }
 }
