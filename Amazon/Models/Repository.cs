@@ -5,16 +5,16 @@ namespace Amazon.Models
 {
     public class Repository
     {
-        public static List<BookResponse> responses = new List<BookResponse>();
-        public static IEnumerable<BookResponse> Responses {
+        private static List<Book> books = new List<Book>();
+        public static IEnumerable<Book> Books {
             get {
-                return responses;
+                return books;
                 }
         }
 
 
-        public static void AddResponse(BookResponse response) {
-            responses.Add(response);
+        public static void AddResponse(Book response) {
+            books.Add(response);
         }
     }
 }

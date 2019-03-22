@@ -23,25 +23,26 @@ namespace Amazon.Controllers
         }
 
         [HttpPost]
-        public ViewResult RegBookForm(BookResponse bookResponse)
+        public ViewResult RegBookForm(Book book)
         {
             if (ModelState.IsValid)
             {
-                Repository.AddResponse(bookResponse);
-                return View("Thanks", bookResponse);
+                Repository.AddResponse(book);
+                return View("Thanks", book);
             }
-            else {
+            else
+            {
                 // Hay un error de validacion y retornamos una vista en blanco. 
                 return View();
             }
-        }
+        } 
 
         [HttpGet]
         public ViewResult ListResponses()
         {
             //return View(Repository.Responses.Where(b => b.Price > 100)); Libros caros
             //return View(Repository.Responses.Where(b => b.Price < 100)); Libros baratos
-            return View(Repository.Responses);
+            return View(Repository.Books);
         }
     }
 }

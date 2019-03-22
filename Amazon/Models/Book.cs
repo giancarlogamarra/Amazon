@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Amazon.Models
 {
-    public class BookResponse
+    public class Book
     {
         [Required(ErrorMessage = "Porfavor ingresa un ISBN")]
         public string ISBN { get; set; }
