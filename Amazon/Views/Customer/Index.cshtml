@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Customer>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Responses</title>
+    <link rel="stylesheet" href="~/vendor/bootstrap/dist/css/bootstrap.css" />
+</head>
+<body class="panel-body">
+    <h2>Lista de Clientes en Amazon</h2>
+    <table class="table table-sm table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Surname</th>
+                <th>Date of birth</th>
+                <th>Gender</th>
+                <th>Departamento</th>
+                <th>Address</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Amazon.Models.Customer book in Model)
+            {
+            <tr>
+                <td>@book.FirstName</td>
+                <td>@book.Surname</td>
+                <td>@book.DateOfBirth</td>
+                <td>@book.Gender</td>
+                <td>@book.Departamento</td>
+                <td>@book.Address</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

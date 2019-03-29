@@ -12,7 +12,6 @@ namespace Amazon.Models
                 }
         }
 
-
         public static void AddResponse(Book response) {
             books.Add(response);
         }
