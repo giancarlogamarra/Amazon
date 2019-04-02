@@ -15,9 +15,9 @@ namespace Amazon.UnitTest
                 Title = "Title 1",Author ="Author1",ISBN ="ISBN1",NroPages =200, Price = 100
             };
             //Act
-            Repository.AddResponse(newBook);
+            BookRepository.AddResponse(newBook);
             //Assert
-            Assert.Equal("Title 1", Repository.Books.FirstOrDefault().Title);
+            Assert.Equal("Title 1", BookRepository.Books.FirstOrDefault().Title);
         }
     }
 }

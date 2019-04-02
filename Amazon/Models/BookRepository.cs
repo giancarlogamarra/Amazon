@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Amazon.Models
 {
-    public class Repository
+    public class BookRepository
     {
         private static List<Book> books = new List<Book>();
         public static IEnumerable<Book> Books {

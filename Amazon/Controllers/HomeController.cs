@@ -12,8 +12,6 @@ namespace Amazon.Controllers
     {
         public ViewResult Index()
         {
-            int hour = DateTime.Now.Hour;
-            ViewBag.Greeting = hour < 12 ? "Goog Morning" : "Good Afternoon";
             return View("Index");
         }
 
@@ -27,7 +25,7 @@ namespace Amazon.Controllers
         {
             if (ModelState.IsValid)
             {
-                Repository.AddResponse(book);
+                BookRepository.AddResponse(book);
                 return View("Thanks", book);
             }
             else
@@ -40,9 +38,9 @@ namespace Amazon.Controllers
         [HttpGet]
         public ViewResult ListResponses()
         {
-            //return View(Repository.Responses.Where(b => b.Price > 100)); Libros caros
-            //return View(Repository.Responses.Where(b => b.Price < 100)); Libros baratos
-            return View(Repository.Books);
+            //return View(BookRepository.Responses.Where(b => b.Price > 100)); Libros caros
+            //return View(BookRepository.Responses.Where(b => b.Price < 100)); Libros baratos
+            return View(BookRepository.Books);
         }
     }
 }
