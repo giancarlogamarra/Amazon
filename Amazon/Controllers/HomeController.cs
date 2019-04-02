@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Amazon.Models;
+using Amazon.Models.Extensions;
 
 namespace Amazon.Controllers
 {
@@ -12,6 +13,7 @@ namespace Amazon.Controllers
     {
         public ViewResult Index()
         {
+            BookRepository.FillBooks();
             return View("Index");
         }
 
@@ -38,9 +40,10 @@ namespace Amazon.Controllers
         [HttpGet]
         public ViewResult ListResponses()
         {
-            //return View(BookRepository.Responses.Where(b => b.Price > 100)); Libros caros
-            //return View(BookRepository.Responses.Where(b => b.Price < 100)); Libros baratos
-            return View(BookRepository.Books);
+            IEnumerable<Book> books = BookRepository.FilterBookByPagesRatherThan(250);
+            decimal TotalPrice = books.TotalPriceExtension();
+            ViewBag.TotalPrice = TotalPrice;
+            return View(books);
         }
     }
 }
